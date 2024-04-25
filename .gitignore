@@ -1,2 +1,5 @@
 back/node_modules/
 front/node_modules/
+.DS_Store
+back/.DS_Store/
+back/.DS_Store/
