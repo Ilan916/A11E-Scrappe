@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '../Buttons/Button';
 import Loader from '../Loader/Loader';
 
-const ErrorDetails = ({ error, fetchElementStructure, isModalLoading }) => {
+const ErrorDetails = ({ error, fetchElementStructure, isModalLoading, isDisabled }) => {
     if (!error) {
         return (
             <div className="px-4 sm:px-0">
@@ -42,8 +42,8 @@ const ErrorDetails = ({ error, fetchElementStructure, isModalLoading }) => {
                                                     <li key={i}>{issue.message}</li>
                                                 ))}
                                             </ul>
-                                            <div className='py-2'>
-                                                <Button ContentText="Voir le HTML" onClickFunction={() => fetchElementStructure(node.target.join(', '))} />
+                                            <div className='py-2 flex gap-3'>
+                                                <Button text="Voir le HTML" onClick={() => fetchElementStructure(node.target.join(', '))} disabled={isDisabled} />
                                                 {isModalLoading && <Loader />}
                                             </div>
                                         </div>

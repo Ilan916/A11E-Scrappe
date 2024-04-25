@@ -16,36 +16,40 @@ export default function Example() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [htmlStructure, setHtmlStructure] = useState('');
+  const [isDisabled, setDisabled] = useState(false);
 
 const audit = async () => {
   setResults(null);
   setSelectedError(null);
   setIsLoading(true);
+  setDisabled(true);
   try {
       const response = await axios.post('http://localhost:3000/audit', { url });
       setResults(response.data);
       setIsLoading(false);
+      setDisabled(false);
   } catch (error) {
       console.error('Erreur lors de l\'audit', error);
       alert('Erreur lors de l\'audit');
       setIsLoading(false);
+      setDisabled(false);
   }
 };
 
 const fetchElementStructure = async (selector) => {
-  // setIsLoading(true);
   setModalLoading(true);
+  setDisabled(true);
   try {
       const response = await axios.post('http://localhost:3000/fetch-element-structure', { url, selector });
       setHtmlStructure(response.data.structure);
       setIsModalOpen(true);
-      // setIsLoading(false);
       setModalLoading(false);
+      setDisabled(false);
   } catch (error) {
       console.error('Erreur lors de la récupération de la structure de l\'élément :', error);
       alert('Erreur lors de la récupération de la structure de l\'élément');
-      // setIsLoading(false);
       setModalLoading(false);
+      setDisabled(false);
   }
 };
 
@@ -62,7 +66,7 @@ const fetchElementStructure = async (selector) => {
                         placeholder="Entrez l'URL ici"
                     />
                 </div>
-                <Button onClickFunction={audit} ContentText="Auditer" />
+                <Button onClick={audit} text="Auditer" disabled={isDisabled} />
                 {isLoading && <Loader />}
             </div>
            <p>Page audité : <span className='font-semibold'>{url}</span></p> 
@@ -78,7 +82,7 @@ const fetchElementStructure = async (selector) => {
 
         <main className="flex-1 overflow-scroll">
           {/* Main area */}
-          <ErrorDetails isModalLoading={isModalLoading}  error={selectedError} fetchElementStructure={fetchElementStructure} setIsModalOpen={setIsModalOpen} />
+          <ErrorDetails isModalLoading={isModalLoading} isDisabled={isDisabled}  error={selectedError} fetchElementStructure={fetchElementStructure} setIsModalOpen={setIsModalOpen} />
           {isModalOpen && (
             <Modal isOpen={isModalOpen} error={selectedError} htmlContent={htmlStructure} onRequestClose={() => setIsModalOpen(false)} />
           )}
