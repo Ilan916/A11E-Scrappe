@@ -37,11 +37,11 @@ Détails de l'installation du projet pour les développements et déploiements l
 
 ### Configuration
 
-Expliquez comment configurer l'environnement de développement.
+Démarrer le serveur Back-end obligatoirement en premier sur le port 3000
 
 ```bash
 # Cloner le dépôt
-git clone votre_url_de_dépôt
+git clone [votre_url_de_dépôt](https://github.com/Ilan916/A11E-Scrappe.git)
 
 # Installer les dépendances pour le serveur
 cd back
