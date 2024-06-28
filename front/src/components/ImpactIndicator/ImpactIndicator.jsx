@@ -12,6 +12,9 @@ function ImpactIndicator({ impact }) {
     case 'moderate':
       color = '#f59e0b';
       break;
+      case 'minor':
+        color = 'rgb(34 211 238)';
+        break;
     default:
       color = 'transparent';
   }
